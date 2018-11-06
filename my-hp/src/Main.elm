@@ -2,9 +2,9 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (..)
-import Html.Attributes exposing (src)
-import Markdown
-import Http exposing (..)
+import Html.Attributes exposing (src, class)
+import Markdown exposing (Options, defaultOptions)
+import Http
 import Json.Decode exposing (field, string)
 
 
@@ -12,8 +12,7 @@ import Json.Decode exposing (field, string)
 
 
 type alias Model =
-    { content : String
-    }
+    String
 
 type alias Filename =
     String
@@ -21,8 +20,9 @@ type alias Filename =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model ""
-    , loadFile "/article2.json" 
+    ( ""
+    , loadFile "/article1.md" 
+    --, loadFile "/article2.json" 
     )
 
 
@@ -40,13 +40,13 @@ update msg model =
     case msg of
         Init ->
             ( model
-            , loadFile "/article2.json" 
+            , Cmd.none 
             )
         
         FileLoaded result ->
             case result of
                 Ok newContent ->
-                    ( { model | content = newContent }
+                    ( newContent
                     , Cmd.none
                     )
 
@@ -60,7 +60,6 @@ update msg model =
 
 ---- VIEW ----
 
-
 view : Model -> Html Msg
 view model =
     div []
@@ -70,21 +69,25 @@ view model =
           ]
         , div []
           [ section []
-            [ toArticle model.content
-            , toArticle "file2"
-            , toArticle "file3"
+            [ toArticle model
+            , toArticle "Article 2"
+            , toArticle "Article 3"
             ]
           ]
         ]
 
 
+options : Options
+options =
+    { defaultOptions | sanitize = False }
+
 toArticle: String -> Html Msg
 toArticle content =
-    article [] [ Markdown.toHtml [] content ]
+    article [] [ Markdown.toHtmlWith options [class "md"] content ]
 
 loadFile: Filename -> Cmd Msg
 loadFile filename =
-    Http.send FileLoaded (Http.get filename (field "content" string))
+    Http.send FileLoaded (Http.getString filename)
 
 ---- PROGRAM ----
 

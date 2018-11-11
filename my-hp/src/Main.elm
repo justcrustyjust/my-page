@@ -63,17 +63,19 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div []
-          [ img [ src "/logo.svg" ] []
-          , h1 [] [ text "Header" ]
-          ]
+        [ div [ class "header" ]
+            [ img [ src "/logo.svg" ] []
+            , h1 [] [ text "Header" ]
+            ]
         , div []
-          [ section []
-            [ toArticle model
-            , toArticle "Article 2"
+            [ section []
+            [ toArticle "Article 1"
+            , toArticle model
+            , toArticle model
             , toArticle "Article 3"
             ]
-          ]
+            ]
+        , div [ class "footer" ] [ text "Vielen Dank." ]
         ]
 
 
@@ -83,7 +85,12 @@ options =
 
 toArticle: String -> Html Msg
 toArticle content =
-    article [] [ Markdown.toHtmlWith options [class "md"] content ]
+    article [] 
+      [ div [ class "article_top"]
+        [ div [ class "article_content"] [ Markdown.toHtmlWith options [class "md"] content ]
+        ]
+      , div [ class "article_bottom" ] []
+      ]
 
 loadFile: Filename -> Cmd Msg
 loadFile filename =

@@ -14,16 +14,10 @@ import Json.Decode exposing (field, string)
 type alias Model =
     String
 
-type alias Filename =
-    String
-
 
 init : ( Model, Cmd Msg )
 init =
-    ( ""
-    , loadFile "/article1.md" 
-    --, loadFile "/article2.json" 
-    )
+    ( "", Cmd.none )
 
 
 
@@ -32,7 +26,6 @@ init =
 
 type Msg
     = Init
-    | FileLoaded (Result Http.Error String)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -42,19 +35,6 @@ update msg model =
             ( model
             , Cmd.none 
             )
-        
-        FileLoaded result ->
-            case result of
-                Ok newContent ->
-                    ( newContent
-                    , Cmd.none
-                    )
-
-                Err _ ->
-                    ( model
-                    , Cmd.none
-                    )
-
 
 
 
@@ -64,16 +44,24 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [ class "header" ]
-            [ img [ src "/logo.svg" ] []
-            , h1 [] [ text "Header" ]
+            [ br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , br [] []
+            , h1 [] [ text "Leonie & Lionel" ]
             ]
         , div []
             [ section []
-            [ toArticle "Article 1"
-            , toArticle model
-            , toArticle model
-            , toArticle "Article 3"
-            ]
+                [ toArticle "Hier entsteht die Hochzeitshomepage von Leonie und Lionel, wir bitten um ein wenig Geduld..."
+                , toHtmlArticle [ img [ src "/World_Plane.gif" ] [] ]
+                ]
             ]
         , div [ class "footer" ] [ text "Vielen Dank." ]
         ]
@@ -83,6 +71,15 @@ options : Options
 options =
     { defaultOptions | sanitize = False }
 
+toHtmlArticle: List (Html Msg) -> Html Msg
+toHtmlArticle html =
+    article [] 
+      [ div [ class "article_top"]
+        [ div [ class "article_content"] html
+        ]
+      , div [ class "article_bottom" ] []
+      ]
+
 toArticle: String -> Html Msg
 toArticle content =
     article [] 
@@ -91,10 +88,6 @@ toArticle content =
         ]
       , div [ class "article_bottom" ] []
       ]
-
-loadFile: Filename -> Cmd Msg
-loadFile filename =
-    Http.send FileLoaded (Http.getString filename)
 
 ---- PROGRAM ----
 

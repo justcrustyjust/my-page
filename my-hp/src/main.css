@@ -1,48 +1,64 @@
 
+@font-face {
+  font-family: 'my_first_crushmedium';
+  src: url('fonts/my_first_crush-webfont.woff2') format('woff2'),
+       url('fonts/my_first_crush-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'my_first_crush_thin';
+  src: url('fonts/my_first_crush_thin-webfont.woff2') format('woff2'),
+       url('fonts/my_first_crush_thin-webfont.woff') format('woff');
+  font-weight: ;
+  font-style: normal;
+
+}
+
 img {
   margin: 20px 0;
-  max-width: 200px;
+  max-width: 80%;
 }
 
 body {
   margin: 0;
   text-align: center;
   color: #293c4b;
-  font-family: Lora,serif;
+  font-family: 'my_first_crushmedium';
   height: 100%;
   width: 100%;
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 600;
+  font-size: x-large;
 
   background-image: url('../img/background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center;
+  background-position: top;
   background-size: 100%;
 }
 
 h1 {
-  font-weight: 500;
-  font-family: 'Great Vibes',cursive;
+  font-weight: 100;
+  font-family: 'my_first_crush_thin';
   font-size: 6em;
   margin-bottom: 0;
   padding: 0;
-  text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.6);
+  text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.3);
   color: #19232b
 }
 
 h2 {
   font-weight: 500;
   font-size: 4em;
-  font-family: 'Great Vibes',cursive;
+  font-family: 'my_first_crush_thin';
   margin-bottom: 0;
   padding: 0;
-  text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.6);
+  text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.3);
   color: #19232b
 }
 
 article:nth-child(odd) h1, h2 {
-  text-shadow: 4px 4px 4px rgba(170, 170, 170, 0.6);
+  text-shadow: 4px 4px 4px rgba(170, 170, 170, 0.3);
 }
 
 section {
@@ -67,11 +83,11 @@ article {
 }
 
 article:nth-child(even) .article_bottom {
-  background: url(../img/arrow1.png) repeat-x bottom rgba(245, 57, 123, 0.7);
+  background: url(../img/arrow1.png) repeat-x bottom rgba(153, 210, 180, 0.9);
 }
 
 article:nth-child(even) .article_top  {
-  background: url(../img/arrow.png) repeat-x top rgba(245, 57, 123, 0.7);
+  background: url(../img/arrow.png) repeat-x top rgba(153, 210, 180, 0.9);
 }
 
 article:nth-child(odd)  {
